@@ -66,6 +66,7 @@ export default class Editor {
                 this.crossword.setCell(this.x, this.y, null);
             }
             this.crossword.generateClues();
+            this.view.updateClues();
         } else if (code === "ArrowLeft") {
             this.movePrev();
         } else if (code === "ArrowRight") {
