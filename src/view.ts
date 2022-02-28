@@ -20,6 +20,7 @@ export default class View {
     create() {
         this.createdSize = this.editor.crossword.size;
         const table = document.querySelector(".crossword");
+        table.innerHTML = "";
         for (let y = 0; y < this.createdSize; y++) {
             const tr = document.createElement("tr");
             for (let x = 0; x < this.createdSize; x++) {
@@ -146,7 +147,7 @@ export default class View {
             li.classList.add(`ax${el.x}y${el.y}`);
             if (this.editor.editMode) {
                 const textarea = document.createElement("textarea");
-                textarea.value = el.clue;
+                textarea.value = el.clue || "";
                 const index = i;
                 textarea.addEventListener("change", (e) => this.editor.handleChangeAcrossClue(index, e));
                 li.append(`${el.index}. `, textarea, ` (${el.length})`);
@@ -164,7 +165,7 @@ export default class View {
             li.classList.add(`dx${el.x}y${el.y}`);
             if (this.editor.editMode) {
                 const textarea = document.createElement("textarea");
-                textarea.value = el.clue;
+                textarea.value = el.clue || "";
                 const index = i;
                 textarea.addEventListener("change", (e) => this.editor.handleChangeDownClue(index, e));
                 li.append(`${el.index}. `, textarea, ` (${el.length})`);

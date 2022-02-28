@@ -18,6 +18,8 @@ function handleKeyDown(e) {
 function handleNew() {
     const size = prompt("What size?");
     crossword.new(size);
+    view.update();
+    view.updateClues();
 }
 
 function handleSave() {
@@ -37,7 +39,9 @@ function handleLoad() {
 
 function loadLocalStorage() {
     const code = localStorage.getItem("default");
-    crossword.load(code);
+    if (code) {
+        crossword.load(code);
+    }
 }
 
 function toggleEditMode() {
