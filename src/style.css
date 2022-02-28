@@ -78,8 +78,13 @@ body {
 .clues li {
     padding: 20px 20px;
 }
+
 .clues li.selected {
     background-color: #e7721260;
+}
+
+.clues li.selected-alt {
+    background-color: #e772121e;
 }
 
 .controls {
