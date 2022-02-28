@@ -60,7 +60,11 @@ export default class Editor {
         } else if (code === "Delete") {
             this.crossword.setCell(this.x, this.y, "");
         } else if (code === "Minus") {
-            this.crossword.setCell(this.x, this.y, null);
+            if (this.currentCell() === null) {
+                this.crossword.setCell(this.x, this.y, "");
+            } else {
+                this.crossword.setCell(this.x, this.y, null);
+            }
             this.crossword.generateClues();
         } else if (code === "ArrowLeft") {
             this.movePrev();
