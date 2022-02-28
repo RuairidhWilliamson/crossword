@@ -1,0 +1,89 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    /* overflow: hidden; */
+    max-height: 100vh;
+    max-width: 100vw;
+    margin: 0;
+}
+
+.crossword {
+    border-spacing: 0;
+    margin: 10px;
+}
+
+.crossword td {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    display: inline-block;
+    font-size: 32px;
+    line-height: 64px;
+    text-align: center;
+    text-transform: capitalize;
+    user-select: none;
+    position: relative;
+}
+
+.crossword td.cell .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 4px;
+}
+
+.crossword td.cell:hover {
+    background-color: palegoldenrod;
+}
+
+.crossword td.cell.selected {
+    background-color: paleturquoise;
+}
+
+.crossword td.cell.selected-alt {
+    background-color: azure;
+}
+
+.crossword td.black, .crossword td.black:hover, .crossword td.black.selected {
+    background-color: black;
+}
+
+.container {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: start;
+    padding: 20px;
+    max-height: 100vh;
+    box-sizing: border-box;
+}
+
+.left-container {
+    display: flex;
+}
+
+.clues-container {
+    height: 100%;
+}
+
+.clues {
+    overflow-y: scroll;
+    height: calc(100vh - 100px);
+    width: 20vw;
+    list-style-type: none;
+    padding-inline-start: 0;
+}
+
+.clues li {
+    padding: 20px 20px;
+}
+.clues li.selected {
+    background-color: #e7721260;
+}
+
+.controls {
+    position: absolute;
+    top: 0;
+    padding: 10px;
+}
