@@ -66,7 +66,6 @@ export default class View {
             }
             let elem = document.querySelector(`li.ax${x-i+1}y${y}`);
             if (elem) {
-                console.log("scroll");
                 elem.scrollIntoView({behavior: "smooth", block: "center"});
                 elem.classList.add("selected");
             }
