@@ -2,14 +2,6 @@ import Clue from "./clue";
 import { Direction } from "./types";
 import View from "./view";
 
-function directionToString(direction: Direction): string {
-    return direction === Direction.Across ? "across" : "down";
-}
-
-function stringToDirection(direction: string): Direction {
-    return direction === "across" ? Direction.Across : Direction.Down;
-}
-
 export default class Crossword {
     size: number;
     grid: (string|null)[];
