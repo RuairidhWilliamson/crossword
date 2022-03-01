@@ -174,5 +174,7 @@ export default class View {
             down.append(li);
             i++;
         });
+        document.querySelector(".clue-count.across").textContent = `(${this.editor.crossword.across.length})`;
+        document.querySelector(".clue-count.down").textContent = `(${this.editor.crossword.down.length})`;
     }
 }
