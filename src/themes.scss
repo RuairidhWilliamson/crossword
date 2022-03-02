@@ -1,0 +1,17 @@
+body {
+    --page-bg: #fff;
+    --text: #1e1e1e;
+    --crossword-bg: #fff;
+    --crossword-black-cell: #1e1e1e;
+    --crossword-selected: paleturquoise;
+    --crossword-selected-alt: azure;
+    --crossword-hover: #dbcea1;
+    &.dark {
+        --page-bg: #1e1e1e;
+        --text: #ffffff;
+        --crossword-bg: #1c2335;
+        --crossword-selected: #c56415;
+        --crossword-selected-alt: #9e5519;
+        --crossword-hover: #91552d;
+    }
+}

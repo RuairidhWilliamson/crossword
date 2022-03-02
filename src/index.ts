@@ -53,6 +53,11 @@ function clearGrid() {
     editor.clearGrid();
 }
 
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+    window.localStorage.setItem("dark", document.body.classList.contains("dark").toString());
+}
+
 document.addEventListener("keydown", handleKeyDown);
 
 document.querySelector(".new").addEventListener("click", handleNew);
@@ -60,5 +65,10 @@ document.querySelector(".save").addEventListener("click", handleSave);
 document.querySelector(".load").addEventListener("click", handleLoad);
 document.querySelector(".toggle-edit").addEventListener("click", toggleEditMode);
 document.querySelector(".clear").addEventListener("click", clearGrid);
+document.querySelector(".dark-mode").addEventListener("click", toggleDarkMode);
+
+if (window.localStorage.getItem("dark") === "true") {
+    document.body.classList.add("dark");
+}
 
 loadLocalStorage();

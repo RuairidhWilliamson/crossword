@@ -1,3 +1,5 @@
+@import './themes.scss';
+
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
@@ -5,6 +7,10 @@ body {
     max-height: 100vh;
     max-width: 100vw;
     margin: 0;
+
+    transition: background-color 0.3s;
+    background-color: var(--page-bg);
+    color: var(--text);
 }
 
 .crossword {
@@ -12,10 +18,10 @@ body {
     margin: 10px;
 }
 
-.crossword td {
+.crossword td.cell {
     width: 60px;
     height: 60px;
-    border: 1px solid black;
+    border: 1px solid var(--crossword-black-cell);
     display: inline-block;
     font-size: 32px;
     line-height: 64px;
@@ -23,6 +29,7 @@ body {
     text-transform: capitalize;
     user-select: none;
     position: relative;
+    background-color: var(--crossword-bg);
 }
 
 .crossword td.cell .number {
@@ -35,19 +42,19 @@ body {
 }
 
 .crossword td.cell:hover {
-    background-color: palegoldenrod;
+    background-color: var(--crossword-hover);
 }
 
 .crossword td.cell.selected {
-    background-color: paleturquoise;
+    background-color: var(--crossword-selected);
 }
 
 .crossword td.cell.selected-alt {
-    background-color: azure;
+    background-color: var(--crossword-selected-alt);
 }
 
 .crossword td.black, .crossword td.black:hover, .crossword td.black.selected {
-    background-color: black;
+    background-color: var(--crossword-black-cell);
 }
 
 .container {
