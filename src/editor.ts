@@ -15,7 +15,7 @@ export default class Editor {
         this.x = 0;
         this.y = 0;
         this.direction = Direction.Across;
-        this.editMode = true;
+        this.editMode = false;
     }
 
     currentCell() {
