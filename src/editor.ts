@@ -42,6 +42,13 @@ export default class Editor {
         this.view.update();
     }
 
+    goto(x: number, y: number, direction: Direction) {
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+        this.view.update();
+    }
+
     handleKeyDown(e) {
         if (e.ctrlKey) return;
         if (document.activeElement !== document.body) return;

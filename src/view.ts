@@ -153,6 +153,7 @@ export default class View {
             } else {
                 li.append(`${el.index}. ${el.clue} (${el.length})`);
             }
+            li.addEventListener("click", () => this.editor.goto(el.x, el.y, Direction.Across));
             across.append(li);
             i++;
         });
@@ -171,6 +172,7 @@ export default class View {
             } else {
                 li.append(`${el.index}. ${el.clue} (${el.length})`);
             }
+            li.addEventListener("click", () => this.editor.goto(el.x, el.y, Direction.Down));
             down.append(li);
             i++;
         });
