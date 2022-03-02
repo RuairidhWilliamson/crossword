@@ -2,7 +2,7 @@ import Crossword from "./crossword";
 import Editor from "./editor";
 import View from "./view";
 
-const crossword = new Crossword(15);
+const crossword = new Crossword();
 const editor = new Editor();
 editor.crossword = crossword;
 const view = new View(editor);
@@ -17,7 +17,8 @@ function handleKeyDown(e) {
 
 function handleNew() {
     const size = prompt("What size?");
-    crossword.new(size);
+    if (!size) return;
+    crossword.new(parseInt(size));
     view.update();
     view.updateClues();
 }
