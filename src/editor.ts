@@ -10,14 +10,16 @@ export default class Editor {
     crossword: Crossword;
     view: View;
     editMode: boolean;
+    autosave: boolean;
 
     constructor() {
         this.x = 0;
         this.y = 0;
         this.direction = Direction.Across;
         this.editMode = false;
+        this.autosave = false;
     }
-
+    
     currentCell() {
         return this.crossword.getCell(this.x, this.y);
     }

@@ -35,6 +35,10 @@ export default class View {
     }
     
     update() {
+        if (this.editor.autosave) {
+            const code = this.editor.crossword.save();
+            localStorage.setItem("default", code);
+        }
         if (this.editor.crossword.size !== this.createdSize) {
             this.create();
         }

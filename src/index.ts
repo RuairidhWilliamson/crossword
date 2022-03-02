@@ -58,6 +58,11 @@ function toggleDarkMode() {
     window.localStorage.setItem("dark", document.body.classList.contains("dark").toString());
 }
 
+function handleAutoSave() {
+    const elem = <HTMLInputElement> document.querySelector(".auto-save");
+    editor.autosave = elem.checked;
+}
+
 document.addEventListener("keydown", handleKeyDown);
 
 document.querySelector(".new").addEventListener("click", handleNew);
@@ -66,6 +71,7 @@ document.querySelector(".load").addEventListener("click", handleLoad);
 document.querySelector(".toggle-edit").addEventListener("click", toggleEditMode);
 document.querySelector(".clear").addEventListener("click", clearGrid);
 document.querySelector(".dark-mode").addEventListener("click", toggleDarkMode);
+document.querySelector(".auto-save").addEventListener("input", handleAutoSave);
 
 if (window.localStorage.getItem("dark") === "true") {
     document.body.classList.add("dark");
