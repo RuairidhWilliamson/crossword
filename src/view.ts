@@ -151,7 +151,7 @@ export default class View {
                 textarea.addEventListener("change", (e) => this.editor.handleChangeAcrossClue(index, e));
                 li.append(`${el.index}. `, textarea, ` (${el.length})`);
             } else {
-                li.append(`${el.index}. ${el.clue} (${el.length})`);
+                li.append(`${el.index}. ${el.clue || ""} (${el.length})`);
             }
             li.addEventListener("click", () => this.editor.goto(el.x, el.y, Direction.Across));
             across.append(li);
@@ -170,7 +170,7 @@ export default class View {
                 textarea.addEventListener("change", (e) => this.editor.handleChangeDownClue(index, e));
                 li.append(`${el.index}. `, textarea, ` (${el.length})`);
             } else {
-                li.append(`${el.index}. ${el.clue} (${el.length})`);
+                li.append(`${el.index}. ${el.clue || ""} (${el.length})`);
             }
             li.addEventListener("click", () => this.editor.goto(el.x, el.y, Direction.Down));
             down.append(li);
