@@ -121,6 +121,7 @@ export default class View {
                 const val = this.editor.crossword.getCell(x, y);
                 if (val === null) {
                     elem.classList.add("black");
+                    elem.querySelector(".value").textContent = "";
                 } else {
                     elem.classList.remove("black");
                     elem.querySelector(".value").textContent = val;

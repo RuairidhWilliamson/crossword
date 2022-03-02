@@ -55,6 +55,9 @@ body {
 
 .crossword td.black, .crossword td.black:hover, .crossword td.black.selected {
     background-color: var(--crossword-black-cell);
+    &.selected {
+        border: 1px solid var(--crossword-selected);
+    }
 }
 
 .container {
