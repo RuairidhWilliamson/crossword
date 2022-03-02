@@ -87,6 +87,11 @@ body {
     background-color: #e772121e;
 }
 
+textarea {
+    width: 100%;
+    height: 4em;
+}
+
 .controls {
     position: absolute;
     top: 0;
