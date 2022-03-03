@@ -7,9 +7,10 @@ body {
     --crossword-selected-alt: azure;
     --crossword-hover: #dbcea1;
     &.dark {
-        --page-bg: #1e1e1e;
+        --page-bg: #2b2b2b;
         --text: #ffffff;
-        --crossword-bg: #1c2335;
+        --crossword-bg: #202533;
+        --crossword-black-cell: #0d131b;
         --crossword-selected: #c56415;
         --crossword-selected-alt: #9e5519;
         --crossword-hover: #91552d;
