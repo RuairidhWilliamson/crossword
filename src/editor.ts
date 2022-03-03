@@ -92,10 +92,12 @@ export default class Editor {
 
     handleChangeAcrossClue(i, e) {
         this.crossword.across[i].clue = e.target.value;
+        this.view.update();
     }
 
     handleChangeDownClue(i, e) {
         this.crossword.down[i].clue = e.target.value;
+        this.view.update();
     }
 
     flip() {
