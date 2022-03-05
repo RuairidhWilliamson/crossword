@@ -14,10 +14,13 @@ body {
     --clues-selected: #e772127a;
     --clues-selected-alt: #e772121e;
 
-    --suggestion-bg: #203a69;
+    --suggestion-bg: #becce7d0;
+    --suggestion-selected: #8e9db9;
+    --suggestion-hover: #8aa4d4;
     &.dark {
         --page-bg: #2b2b2b;
         --text: #ffffff;
+        
         --crossword-bg: #202533;
         --crossword-black-cell: #0d131b;
         --crossword-selected: #b86827;
@@ -25,5 +28,9 @@ body {
         --crossword-hover: #91552d;
 
         --kbd-bg: #3b3b3b;
+
+        --suggestion-bg: #203a69c5;
+        --suggestion-selected: #3a5381;
+        --suggestion-hover: #4a6699;
     }
 }

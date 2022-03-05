@@ -169,8 +169,16 @@ kbd {
     left: 0;
     background-color: var(--suggestion-bg);
     padding: 5px;
-
+    backdrop-filter: blur(3px);
+    
     &.show {
         visibility: visible;
+    }
+
+    .suggestions > div {
+        cursor: pointer;
+        &:hover {
+            background-color: var(--suggestion-hover);
+        }
     }
 }

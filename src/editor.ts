@@ -12,6 +12,7 @@ export default class Editor {
     view: View;
     editMode: boolean;
     autosave: boolean;
+    suggestions: boolean;
 
     constructor() {
         this.x = 0;
@@ -85,7 +86,7 @@ export default class Editor {
             this.y = y;
         }
         this.view.update();
-        this.view.hideSuggestions();
+        this.hideSuggestions();
     }
 
     goto(x: number, y: number, direction: Direction) {
@@ -142,7 +143,7 @@ export default class Editor {
             return; // Don't hide suggestions
         }
         this.view.update();
-        this.view.hideSuggestions();
+        this.hideSuggestions();
     }
 
     handleChangeAcrossClue(i, e) {
@@ -276,5 +277,26 @@ export default class Editor {
         const query = this.getSelected();
         const possibleWords = lookupWords(query);
         this.view.setSuggestion(possibleWords);
+        this.suggestions = true;
+    }
+
+    hideSuggestions() {
+        this.view.hideSuggestions();
+        this.suggestions = false;
+    }
+
+    fill(suggestion: string) {
+        const base = this.base();
+        if (base === null) return;
+        const [x, y] = base;
+        for (let i = 0; i < suggestion.length; i++) {
+            if (this.direction === Direction.Across) {
+                this.crossword.setCell(x + i, y, suggestion[i]);
+            } else if (this.direction === Direction.Down) {
+                this.crossword.setCell(x, y + i, suggestion[i]);
+            }
+        }
+        this.view.update();
+        this.hideSuggestions();
     }
 }

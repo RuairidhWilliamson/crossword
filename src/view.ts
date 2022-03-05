@@ -187,7 +187,7 @@ export default class View {
         document.querySelector(".clue-count.down").textContent = `(${this.editor.crossword.down.length})`;
     }
 
-    setSuggestion(suggestions) {
+    setSuggestion(suggestions: string[]) {
         const base = this.editor.base();
         if (base === null) return;
         const [x, y] = base;
@@ -218,12 +218,12 @@ export default class View {
         shuffled.slice(0, 10).forEach(suggestion => {
             const elem = document.createElement("div");
             elem.textContent = suggestion;
+            elem.addEventListener("click", () => this.editor.fill(suggestion));
             suggestionsList.append(elem);
         });
     }
 
     hideSuggestions() {
-        
         const suggestionBox: HTMLElement = document.querySelector(".suggestion-box");
         suggestionBox.classList.remove("show");
     }
