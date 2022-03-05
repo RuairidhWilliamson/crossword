@@ -1,18 +1,27 @@
 body {
     --page-bg: #fff;
     --text: #1e1e1e;
+
     --crossword-bg: #fff;
     --crossword-black-cell: #1e1e1e;
     --crossword-selected: paleturquoise;
     --crossword-selected-alt: azure;
     --crossword-hover: #dbcea1;
+
+    --kbd-bg: #d3d3d3;
+    --kbd-text-color: var(--text);
+
+    --clues-selected: #e772127a;
+    --clues-selected-alt: #e772121e;
     &.dark {
         --page-bg: #2b2b2b;
         --text: #ffffff;
         --crossword-bg: #202533;
         --crossword-black-cell: #0d131b;
-        --crossword-selected: #c56415;
-        --crossword-selected-alt: #9e5519;
+        --crossword-selected: #b86827;
+        --crossword-selected-alt: #834614;
         --crossword-hover: #91552d;
+
+        --kbd-bg: #3b3b3b;
     }
 }

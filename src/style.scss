@@ -30,27 +30,35 @@ body {
     user-select: none;
     position: relative;
     background-color: var(--crossword-bg);
-}
+    cursor: pointer;
 
-.crossword td.cell .number {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 16px;
-    line-height: 16px;
-    padding: 4px;
-}
+    &.selected {
+        background-color: var(--crossword-selected);
+    }
 
-.crossword td.cell:hover {
-    background-color: var(--crossword-hover);
-}
+    &.selected-alt {
+        background-color: var(--crossword-selected-alt);
+    }
 
-.crossword td.cell.selected {
-    background-color: var(--crossword-selected);
-}
+    &:hover {
+        background-color: var(--crossword-hover);
+    }
 
-.crossword td.cell.selected-alt {
-    background-color: var(--crossword-selected-alt);
+    &.black {
+        background-color: var(--crossword-black-cell);
+        &.selected {
+            border: 1px solid var(--crossword-selected);
+        }
+    }
+
+    .number {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 16px;
+        line-height: 16px;
+        padding: 4px;
+    }
 }
 
 .crossword td.black, .crossword td.black:hover, .crossword td.black.selected {
@@ -83,18 +91,19 @@ body {
     width: 20vw;
     list-style-type: none;
     padding-inline-start: 0;
-}
 
-.clues li {
-    padding: 20px 20px;
-}
+    li {
+        padding: 20px 20px;
+        
+        &.selected {
+            background-color: var(--clues-selected);
+        }
 
-.clues li.selected {
-    background-color: #e7721260;
-}
+        &.selected-alt {
 
-.clues li.selected-alt {
-    background-color: #e772121e;
+            background-color: var(--clues-selected-alt);
+        }
+    }
 }
 
 textarea {
@@ -106,4 +115,49 @@ textarea {
     position: absolute;
     top: 0;
     padding: 10px;
+}
+
+kbd {
+    display: inline-block;
+    background-color: var(--kbd-bg);
+    color: var(--kbd-text-color);
+    padding: 5px;
+    border-radius: 5px;
+    margin: 2px;
+    min-width: 1em;
+    text-align: center;
+}
+
+.popup-container {
+    background-color: #000000e0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    visibility: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.5s;
+
+    .popup {
+        background-color: var(--page-bg);
+        text-align: left;
+        margin: auto;
+        cursor: default;
+        padding: 20px;
+        transform: translateY(-200px);
+        transition: transform 0.5s;
+    }
+
+    &.show {
+        visibility: visible;
+        opacity: 1;
+        .popup {
+            transform: translateY(0px);
+        }
+    }
 }

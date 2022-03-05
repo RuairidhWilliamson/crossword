@@ -33,9 +33,21 @@
             <button class="toggle-edit">Edit</button>
             <button class="clear">Clear Grid</button>
             <button class="dark-mode">Dark Mode</button>
-            <span>
-                Press <kbd>-</kbd> to toggle black square.
-            </span>
+            <button class="help" popup-toggle="help">Help</button>
+        </div>
+        <div class="popup-container" id="help">
+            <div class="popup">
+                <h1>Help</h1>
+                <div>
+                    <h2>Grid Controls</h2>
+                    <table>
+                        <tr><td><kbd>&uparrow;</kbd><kbd>&downarrow;</kbd><kbd>&leftarrow;</kbd><kbd>&rightarrow;</kbd></td><td>Moves the selector</td></tr>
+                        <tr><td><kbd>SPACE</kbd></td><td>Inverts selected direction</td></tr>
+                        <tr><td><kbd>-</kbd></td><td>Toggles empty square</td></tr>
+                        <tr><td><kbd>/</kbd> or <kbd>?</kbd></td><td>Suggest words for selection</td></tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
 </html>
