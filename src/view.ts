@@ -51,67 +51,69 @@ export default class View {
             el.classList.remove("selected-alt");
         });
         this.currentElem().classList.add("selected");
-        const x = this.editor.x;
-        const y = this.editor.y;
-        if (this.editor.direction === Direction.Across) {
-            let i = 1;
-            for (; i < this.editor.crossword.size; i++) {
-                if (this.editor.crossword.getCell(x + i, y) === null) {
-                    break;
+        if (this.editor.currentCell() !== null) {
+            const x = this.editor.x;
+            const y = this.editor.y;
+            if (this.editor.direction === Direction.Across) {
+                let i = 1;
+                for (; i < this.editor.crossword.size; i++) {
+                    if (this.editor.crossword.getCell(x + i, y) === null) {
+                        break;
+                    }
+                    this.getElem(x + i, y).classList.add("selected-alt");
                 }
-                this.getElem(x + i, y).classList.add("selected-alt");
-            }
-            i = 1;
-            for (; i < this.editor.crossword.size; i++) {
-                if (this.editor.crossword.getCell(x - i, y) === null) {
-                    break;
+                i = 1;
+                for (; i < this.editor.crossword.size; i++) {
+                    if (this.editor.crossword.getCell(x - i, y) === null) {
+                        break;
+                    }
+                    this.getElem(x - i, y).classList.add("selected-alt");
                 }
-                this.getElem(x - i, y).classList.add("selected-alt");
-            }
-            let elem = document.querySelector(`li.ax${x-i+1}y${y}`);
-            if (elem) {
-                elem.scrollIntoView({behavior: "smooth", block: "center"});
-                elem.classList.add("selected");
-            }
-            i = 1;
-            for (; i < this.editor.crossword.size; i++) {
-                if (this.editor.crossword.getCell(x, y - i) === null) {
-                    break;
+                let elem = document.querySelector(`li.ax${x-i+1}y${y}`);
+                if (elem) {
+                    elem.scrollIntoView({behavior: "smooth", block: "center"});
+                    elem.classList.add("selected");
                 }
-            }
-            elem = document.querySelector(`li.dx${x}y${y-i+1}`);
-            if (elem) {
-                elem.classList.add("selected-alt");
-            }
-        } else if (this.editor.direction === Direction.Down) {
-            let i = 1;
-            for (; i < this.editor.crossword.size; i++) {
-                if (this.editor.crossword.getCell(x, y + i) === null) {
-                    break;
+                i = 1;
+                for (; i < this.editor.crossword.size; i++) {
+                    if (this.editor.crossword.getCell(x, y - i) === null) {
+                        break;
+                    }
                 }
-                this.getElem(x, y + i).classList.add("selected-alt");
-            }
-            i = 1;
-            for (; i < this.editor.crossword.size; i++) {
-                if (this.editor.crossword.getCell(x, y - i) === null) {
-                    break;
+                elem = document.querySelector(`li.dx${x}y${y-i+1}`);
+                if (elem) {
+                    elem.classList.add("selected-alt");
                 }
-                this.getElem(x, y - i).classList.add("selected-alt");
-            }
-            let elem = document.querySelector(`li.dx${x}y${y-i+1}`);
-            if (elem) {
-                elem.scrollIntoView({behavior: "smooth", block: "center"});
-                elem.classList.add("selected");
-            }
-            i = 1;
-            for (; i < this.editor.crossword.size; i++) {
-                if (this.editor.crossword.getCell(x - i, y) === null) {
-                    break;
+            } else if (this.editor.direction === Direction.Down) {
+                let i = 1;
+                for (; i < this.editor.crossword.size; i++) {
+                    if (this.editor.crossword.getCell(x, y + i) === null) {
+                        break;
+                    }
+                    this.getElem(x, y + i).classList.add("selected-alt");
                 }
-            }
-            elem = document.querySelector(`li.ax${x-i+1}y${y}`);
-            if (elem) {
-                elem.classList.add("selected-alt");
+                i = 1;
+                for (; i < this.editor.crossword.size; i++) {
+                    if (this.editor.crossword.getCell(x, y - i) === null) {
+                        break;
+                    }
+                    this.getElem(x, y - i).classList.add("selected-alt");
+                }
+                let elem = document.querySelector(`li.dx${x}y${y-i+1}`);
+                if (elem) {
+                    elem.scrollIntoView({behavior: "smooth", block: "center"});
+                    elem.classList.add("selected");
+                }
+                i = 1;
+                for (; i < this.editor.crossword.size; i++) {
+                    if (this.editor.crossword.getCell(x - i, y) === null) {
+                        break;
+                    }
+                }
+                elem = document.querySelector(`li.ax${x-i+1}y${y}`);
+                if (elem) {
+                    elem.classList.add("selected-alt");
+                }
             }
         }
 

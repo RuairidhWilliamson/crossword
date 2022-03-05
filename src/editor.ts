@@ -24,6 +24,48 @@ export default class Editor {
         return this.crossword.getCell(this.x, this.y);
     }
 
+    base(): number[] {
+        if (this.currentCell() === null) {
+            return null;
+        }
+        if (this.direction === Direction.Across) {
+            for (let i = 1; i < this.crossword.size; i++) {
+                if (this.crossword.getCell(this.x - i, this.y) === null) {
+                    return [this.x - i + 1, this.y];
+                }
+            }
+        } else if (this.direction === Direction.Down) {
+            for (let i = 1; i < this.crossword.size; i++) {
+                if (this.crossword.getCell(this.x, this.y - i) === null) {
+                    return [this.x, this.y - i + 1];
+                }
+            }
+        }
+    }
+
+    currentClue(): number {
+        const base = this.base();
+        if (base === null) {
+            return null;
+        }
+        const [x, y] = base;
+        if (this.direction === Direction.Across) {
+            for (let i = 0; i < this.crossword.across.length; i++) {
+                const clue = this.crossword.across[i];
+                if (x === clue.x && y === clue.y) {
+                    return i;
+                }
+            }
+        } else if (this.direction === Direction.Down) {
+            for (let i = 0; i < this.crossword.down.length; i++) {
+                const clue = this.crossword.down[i];
+                if (x === clue.x && y === clue.y) {
+                    return i;
+                }
+            }
+        }
+    }
+
     clearGrid() {
         this.crossword.clearGrid();
         this.view.update();
@@ -77,15 +119,22 @@ export default class Editor {
             this.crossword.generateClues();
             this.view.updateClues();
         } else if (code === "ArrowLeft") {
-            this.movePrev();
+            this.x = (this.x - 1 + this.crossword.size) % this.crossword.size;
         } else if (code === "ArrowRight") {
-            this.moveNext();
+            this.x = (this.x + 1) % this.crossword.size;
         } else if (code === "ArrowUp") {
             this.y = (this.y - 1 + this.crossword.size) % this.crossword.size;
         } else if (code === "ArrowDown") {
-            this.y = (this.y + 1 + this.crossword.size) % this.crossword.size;
+            this.y = (this.y + 1) % this.crossword.size;
         } else if (code === "Space") {
             this.flip();
+        } else if (code === "Tab") {
+            if (e.shiftKey) {
+                this.jumpPrev();
+            } else {
+                this.jumpNext();
+            }
+            e.preventDefault();
         }
         this.view.update();
     }
@@ -108,14 +157,12 @@ export default class Editor {
         if (this.direction === Direction.Across) {
             this.x += 1;
         } else if (this.direction === Direction.Down) {
-            this.y += 1;
+            this.x += 1;
         }
         while (true) {
             if (this.x >= this.crossword.size) {
                 this.x = 0;
-                if (this.direction === Direction.Across) {
-                    this.y += 1;
-                }
+                this.y += 1;
                 continue;
             }
             if (this.y >= this.crossword.size) {
@@ -136,7 +183,7 @@ export default class Editor {
         if (this.direction === Direction.Across) {
             this.x -= 1;
         } else if (this.direction === Direction.Down) {
-            this.y -= 1;
+            this.x -= 1;
         }
         while (true) {
             if (this.x < 0) {
@@ -159,5 +206,33 @@ export default class Editor {
             break;
         }
         this.view.update();
+    }
+
+    jumpNext() {
+        const i = this.currentClue();
+        if (i === null) return;
+        if (this.direction === Direction.Across) {
+            const clue = this.crossword.across[(i + 1) % this.crossword.across.length];
+            this.x = clue.x;
+            this.y = clue.y;
+        } else if (this.direction === Direction.Down) {
+            const clue = this.crossword.down[(i + 1) % this.crossword.down.length];
+            this.x = clue.x;
+            this.y = clue.y;
+        }
+    }
+
+    jumpPrev() {
+        const i = this.currentClue();
+        if (i === null) return;
+        if (this.direction === Direction.Across) {
+            const clue = this.crossword.across[(i - 1 + this.crossword.across.length) % this.crossword.across.length];
+            this.x = clue.x;
+            this.y = clue.y;
+        } else if (this.direction === Direction.Down) {
+            const clue = this.crossword.down[(i - 1 + this.crossword.down.length) % this.crossword.down.length];
+            this.x = clue.x;
+            this.y = clue.y;
+        }
     }
 }
