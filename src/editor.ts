@@ -22,34 +22,37 @@ export default class Editor {
         this.autosave = false;
     }
     
-    currentCell() {
+    currentCell(): string|null {
         return this.crossword.getCell(this.x, this.y);
     }
 
-    base(): number[] {
+    base(): number[]|null {
+        console.log('Base', this.currentCell());
         if (this.currentCell() === null) {
             return null;
         }
         if (this.direction === Direction.Across) {
-            for (let i = 1; i < this.crossword.size; i++) {
+            for (let i = 1; i <= this.crossword.size; i++) {
                 if (this.crossword.getCell(this.x - i, this.y) === null) {
                     return [this.x - i + 1, this.y];
                 }
             }
         } else if (this.direction === Direction.Down) {
-            for (let i = 1; i < this.crossword.size; i++) {
+            for (let i = 1; i <= this.crossword.size; i++) {
                 if (this.crossword.getCell(this.x, this.y - i) === null) {
                     return [this.x, this.y - i + 1];
                 }
             }
         }
+        return null
     }
 
-    currentClue(): number {
+    currentClue(): number|null {
         const base = this.base();
         if (base === null) {
             return null;
         }
+        console.log(base);
         const [x, y] = base;
         if (this.direction === Direction.Across) {
             for (let i = 0; i < this.crossword.across.length; i++) {
@@ -154,12 +157,12 @@ export default class Editor {
         this.hideSuggestions();
     }
 
-    handleChangeAcrossClue(i, e) {
+    handleChangeAcrossClue(i: number, e) {
         this.crossword.across[i].clue = e.target.value;
         this.view.update();
     }
 
-    handleChangeDownClue(i, e) {
+    handleChangeDownClue(i: number, e) {
         this.crossword.down[i].clue = e.target.value;
         this.view.update();
     }
@@ -169,58 +172,48 @@ export default class Editor {
     }
 
     moveNext() {
+        let x = this.x;
+        let y = this.y;
         if (this.direction === Direction.Across) {
-            this.x += 1;
+            x += 1;
         } else if (this.direction === Direction.Down) {
-            this.x += 1;
+            y += 1;
         }
-        while (true) {
-            if (this.x >= this.crossword.size) {
-                this.x = 0;
-                this.y += 1;
-                continue;
-            }
-            if (this.y >= this.crossword.size) {
-                this.y = 0;
-                if (this.direction === Direction.Down) {
-                    this.x += 1;
-                }
-                continue;
-            }
-            if (this.currentCell() === null) {
-                this.moveNext();
-            }
-            break;
+        if (this.crossword.getCell(x, y) === null) {
+            this.jumpNext();
+        } else {
+            this.x = x;
+            this.y = y;
         }
     }
 
     movePrev() {
+        let x = this.x;
+        let y = this.y;
         if (this.direction === Direction.Across) {
-            this.x -= 1;
+            x -= 1;
         } else if (this.direction === Direction.Down) {
-            this.x -= 1;
+            y -= 1;
         }
-        while (true) {
-            if (this.x < 0) {
-                this.x = this.crossword.size - 1;
+        if (this.crossword.getCell(x, y) === null) {
+            this.jumpPrev();
+            for (let i = 1; i <= this.crossword.size; i++) {
                 if (this.direction === Direction.Across) {
-                    this.y -= 1;
+                    if (this.crossword.getCell(this.x + i, this.y) === null) {
+                        this.x += i - 1;
+                        break;
+                    }
+                } else if (this.direction === Direction.Down) {
+                    if (this.crossword.getCell(this.x, this.y + i) === null) {
+                        this.y += i - 1;
+                        break;
+                    }
                 }
-                continue;
             }
-            if (this.y < 0) {
-                this.y = this.crossword.size - 1;
-                if (this.direction === Direction.Down) {
-                    this.x -= 1;
-                }
-                continue;
-            }
-            if (this.currentCell() === null) {
-                this.movePrev();
-            }
-            break;
+        } else {
+            this.x = x;
+            this.y = y;
         }
-        this.view.update();
     }
 
     jumpNext() {
