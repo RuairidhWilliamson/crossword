@@ -186,4 +186,45 @@ export default class View {
         document.querySelector(".clue-count.across").textContent = `(${this.editor.crossword.across.length})`;
         document.querySelector(".clue-count.down").textContent = `(${this.editor.crossword.down.length})`;
     }
+
+    setSuggestion(suggestions) {
+        const base = this.editor.base();
+        if (base === null) return;
+        const [x, y] = base;
+        const elem = document.querySelector(`.cell.x${x}y${y}`);
+        const rect = elem.getBoundingClientRect();
+        const suggestionBox: HTMLElement = document.querySelector(".suggestion-box");
+        suggestionBox.style.top = "inherit";
+        suggestionBox.style.bottom = "inherit";
+        suggestionBox.style.left = "inherit";
+        suggestionBox.style.right = "inherit";
+        if (this.editor.direction === Direction.Across) {
+            if (rect.y > window.innerHeight / 2) {
+                suggestionBox.style.bottom = window.innerHeight - rect.top + "px";
+            } else {
+                suggestionBox.style.top = rect.bottom + "px";
+            }
+            suggestionBox.style.left = rect.left + "px";
+        } else if (this.editor.direction === Direction.Down) {
+            suggestionBox.style.top = rect.top + "px";
+            suggestionBox.style.right = window.innerWidth - rect.left + "px";
+        }
+        suggestionBox.classList.add("show");
+        const suggestionsCount = suggestionBox.querySelector(".suggestion-count");
+        suggestionsCount.textContent = `${suggestions.length} suggestions...`;
+        const suggestionsList = suggestionBox.querySelector(".suggestions");
+        suggestionsList.innerHTML = "";
+        const shuffled = suggestions.sort(() => 0.5 - Math.random());
+        shuffled.slice(0, 10).forEach(suggestion => {
+            const elem = document.createElement("div");
+            elem.textContent = suggestion;
+            suggestionsList.append(elem);
+        });
+    }
+
+    hideSuggestions() {
+        
+        const suggestionBox: HTMLElement = document.querySelector(".suggestion-box");
+        suggestionBox.classList.remove("show");
+    }
 }

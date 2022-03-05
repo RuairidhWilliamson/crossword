@@ -161,3 +161,16 @@ kbd {
         }
     }
 }
+
+.suggestion-box {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    background-color: var(--suggestion-bg);
+    padding: 5px;
+
+    &.show {
+        visibility: visible;
+    }
+}

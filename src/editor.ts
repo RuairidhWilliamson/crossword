@@ -1,6 +1,7 @@
 import Crossword from "./crossword";
 import { Direction } from "./types";
 import View from "./view";
+import {lookupWords} from './lookup';
 
 
 export default class Editor {
@@ -84,6 +85,7 @@ export default class Editor {
             this.y = y;
         }
         this.view.update();
+        this.view.hideSuggestions();
     }
 
     goto(x: number, y: number, direction: Direction) {
@@ -135,8 +137,12 @@ export default class Editor {
                 this.jumpNext();
             }
             e.preventDefault();
+        } else if (code === "Slash") {
+            this.suggest();
+            return; // Don't hide suggestions
         }
         this.view.update();
+        this.view.hideSuggestions();
     }
 
     handleChangeAcrossClue(i, e) {
@@ -234,5 +240,41 @@ export default class Editor {
             this.x = clue.x;
             this.y = clue.y;
         }
+    }
+
+    getSelected(): string {
+        const base = this.base();
+        if (base === null) return null;
+        const [x, y] = base;
+        let out = "";
+        if (this.direction === Direction.Across) {
+            for (let i = 0; i < this.crossword.size; i++) {
+                const cell = this.crossword.getCell(x + i, y);
+                if (cell === null) {
+                    return out;
+                } else if (cell === "") {
+                    out += " ";
+                } else {
+                    out += cell;
+                }
+            }
+        } else if (this.direction === Direction.Down) {
+            for (let i = 0; i < this.crossword.size; i++) {
+                const cell = this.crossword.getCell(x, y + i);
+                if (cell === null) {
+                    return out;
+                } else if (cell === "") {
+                    out += " ";
+                } else {
+                    out += cell;
+                }
+            }
+        }
+    }
+
+    suggest() {
+        const query = this.getSelected();
+        const possibleWords = lookupWords(query);
+        this.view.setSuggestion(possibleWords);
     }
 }
