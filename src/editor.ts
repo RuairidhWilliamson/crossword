@@ -69,6 +69,7 @@ export default class Editor {
     }
 
     clearGrid() {
+        if (!confirm("Are you sure you want to clear the grid?")) return;
         this.crossword.clearGrid();
         this.view.update();
     }
@@ -87,6 +88,19 @@ export default class Editor {
         }
         this.view.update();
         this.hideSuggestions();
+    }
+
+    handleToggleEmptyCell() {
+        if (this.crossword.across.some(c => c.clue) || this.crossword.down.some(c => c.clue)) {
+            if (!confirm("Modifying the empty squares will clear all written clues. Are you sure?")) return;
+        }
+        if (this.currentCell() === null) {
+            this.crossword.setCell(this.x, this.y, "");
+        } else {
+            this.crossword.setCell(this.x, this.y, null);
+        }
+        this.crossword.generateClues();
+        this.view.updateClues();
     }
 
     goto(x: number, y: number, direction: Direction) {
@@ -114,13 +128,7 @@ export default class Editor {
         } else if (code === "Delete") {
             this.crossword.setCell(this.x, this.y, "");
         } else if (code === "Minus") {
-            if (this.currentCell() === null) {
-                this.crossword.setCell(this.x, this.y, "");
-            } else {
-                this.crossword.setCell(this.x, this.y, null);
-            }
-            this.crossword.generateClues();
-            this.view.updateClues();
+            this.handleToggleEmptyCell();
         } else if (code === "ArrowLeft") {
             this.x = (this.x - 1 + this.crossword.size) % this.crossword.size;
         } else if (code === "ArrowRight") {

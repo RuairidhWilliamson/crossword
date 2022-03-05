@@ -50,10 +50,6 @@ function toggleEditMode() {
     editor.toggleEditMode();
 }
 
-function clearGrid() {
-    editor.clearGrid();
-}
-
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
     window.localStorage.setItem("dark", document.body.classList.contains("dark").toString());
@@ -70,7 +66,7 @@ document.querySelector(".new").addEventListener("click", handleNew);
 document.querySelector(".save").addEventListener("click", handleSave);
 document.querySelector(".load").addEventListener("click", handleLoad);
 document.querySelector(".toggle-edit").addEventListener("click", toggleEditMode);
-document.querySelector(".clear").addEventListener("click", clearGrid);
+document.querySelector(".clear").addEventListener("click", () => editor.clearGrid());
 document.querySelector(".dark-mode").addEventListener("click", toggleDarkMode);
 document.querySelector(".auto-save").addEventListener("input", handleAutoSave);
 
