@@ -250,7 +250,7 @@ export default class Editor {
         const [x, y] = base;
         let out = "";
         if (this.direction === Direction.Across) {
-            for (let i = 0; i < this.crossword.size; i++) {
+            for (let i = 0; i <= this.crossword.size; i++) {
                 const cell = this.crossword.getCell(x + i, y);
                 if (cell === null) {
                     return out;
@@ -261,7 +261,7 @@ export default class Editor {
                 }
             }
         } else if (this.direction === Direction.Down) {
-            for (let i = 0; i < this.crossword.size; i++) {
+            for (let i = 0; i <= this.crossword.size; i++) {
                 const cell = this.crossword.getCell(x, y + i);
                 if (cell === null) {
                     return out;
@@ -272,10 +272,12 @@ export default class Editor {
                 }
             }
         }
+        throw "getSelected error state";
     }
 
     suggest() {
         const query = this.getSelected();
+        if (query === null) return;
         const possibleWords = lookupWords(query);
         this.view.setSuggestion(possibleWords);
         this.suggestions = true;
