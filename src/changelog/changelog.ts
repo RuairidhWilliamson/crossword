@@ -43,4 +43,11 @@ export default [
             "Fixed bugs",
         ],
     },
+    {
+        version: "0.1.1",
+        date: "2022/03/05",
+        changes: [
+            "Fixed json not loading",
+        ],
+    },
 ];
