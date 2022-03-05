@@ -1,4 +1,4 @@
-import words from './words/words_by_length.json';
+import words from './words/words_by_length';
 
 export function lookupWords(query: string): string[] {
     const length = query.length;

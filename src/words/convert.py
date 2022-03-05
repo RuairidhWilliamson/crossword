@@ -12,4 +12,5 @@ for word in tqdm(words):
     words_by_length[length].append(word)
 
 with open("words_by_length.json", "w") as f:
-    json.dump(words_by_length, f, separators=(',', ':'))
+    output = json.dumps(words_by_length, separators=(',', ':'))
+    f.write("export default" + output)
