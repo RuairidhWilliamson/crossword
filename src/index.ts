@@ -2,6 +2,7 @@ import Crossword from "./crossword";
 import Editor from "./editor";
 import View from "./view";
 import './popups';
+import './changelog/index';
 
 const crossword = new Crossword();
 const editor = new Editor();

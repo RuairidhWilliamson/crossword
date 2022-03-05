@@ -14,5 +14,5 @@ function handlePopupClose(e) {
     }
 }
 
-document.querySelector("[popup-toggle]").addEventListener("click", handlePopupToggle);
-document.querySelector(".popup-container").addEventListener("click", handlePopupClose);
+document.querySelectorAll("[popup-toggle]").forEach(el => el.addEventListener("click", handlePopupToggle));
+document.querySelectorAll(".popup-container").forEach(el => el.addEventListener("click", handlePopupClose));

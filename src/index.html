@@ -34,11 +34,14 @@
             <button class="clear">Clear Grid</button>
             <button class="dark-mode">Dark Mode</button>
             <button class="help" popup-toggle="help">Help</button>
+            <button popup-toggle="changelog">Changelog</button>
         </div>
         <div class="popup-container" id="help">
             <div class="popup">
                 <h1>Help</h1>
                 <div>
+                    <h2>Recommendation</h2>
+                    <p>Fill in the grid first and write your clues after because if you toggle an empty square it will clear all the clues.</p>
                     <h2>Grid Controls</h2>
                     <table>
                         <tr><td><kbd>&uparrow;</kbd><kbd>&downarrow;</kbd><kbd>&leftarrow;</kbd><kbd>&rightarrow;</kbd></td><td>Moves the selector</td></tr>
@@ -50,11 +53,16 @@
                 </div>
             </div>
         </div>
+        <div class="popup-container" id="changelog">
+            <div class="popup">
+                <h1>Changelog</h1>
+                <div class="changelog">
+                </div>
+            </div>
+        </div>
         <div class="suggestion-box">
             <div class="suggestion-count">56 suggestions</div>
-            <div class="suggestions">
-
-            </div>
+            <div class="suggestions"></div>
         </div>
     </body>
 </html>

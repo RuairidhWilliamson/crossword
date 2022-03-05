@@ -151,6 +151,9 @@ kbd {
         padding: 20px;
         transform: translateY(-200px);
         transition: transform 0.5s;
+        max-height: 80vh;
+        max-width: 60vw;
+        overflow-y: auto;
     }
 
     &.show {
@@ -180,5 +183,13 @@ kbd {
         &:hover {
             background-color: var(--suggestion-hover);
         }
+    }
+}
+
+.changelog {
+    padding: 0px 20px;
+    .changelog-title {
+        display: flex;
+        justify-content: space-between;
     }
 }
