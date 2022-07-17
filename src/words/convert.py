@@ -48,7 +48,7 @@ for i in words_by_length:
     words_by_length[i] = list(set(words_by_length[i]))
 print("\nDone writing file")
 
-with open("words_by_length.json", "w") as f:
+with open("words_by_length.js", "w") as f:
     output = json.dumps(words_by_length, separators=(',', ':'))
     f.write("export default" + output)
 
